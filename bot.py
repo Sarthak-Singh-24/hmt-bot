@@ -23,6 +23,7 @@ send_telegram("✅ Bot is running")
 in_stock_last_time = False
 
 while True:
+   while True:
     try:
         r = requests.get(URL)
 
@@ -30,14 +31,14 @@ while True:
             print("Still out of stock")
             in_stock_last_time = False
 
-    else:
-        print("IN STOCK!!!")
+        else:
+            print("IN STOCK!!!")
 
-        if not in_stock_last_time:
-        send_telegram("🚨 HMT WATCH IS IN STOCK! BUY NOW!")
-        in_stock_last_time = True
+            if not in_stock_last_time:
+                send_telegram("🚨 HMT WATCH IS IN STOCK! BUY NOW!")
+                in_stock_last_time = True
 
     except Exception as e:
         print("Error:", e)
 
-    time.sleep(10)  # check every 10 sec
+    time.sleep(10)
