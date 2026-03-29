@@ -1,11 +1,17 @@
 import requests
 import time
 
-# ====== YOUR DETAILS ======
+# =========================
+# CONFIG
+# =========================
+
+URL = "https://www.hmtwatches.in/product_overview?id=eyJpdiI6IlhnZS9EemVhTXJnU09aL1VtSndnWUE9PSIsInZhbHVlIjoiSGdCM3l3a2RGQTNhZUxSTnhpUEtjZz09IiwibWFjIjoiZThiZWQyNGMzNjA4MThmZDRhYmYxNDFlYTE1ZTU2YTAxY2NlNWNlNGJhNjZmNzQ0OWZkMjA4OTcyYzQ3ZmY3NyIsInRhZyI6IiJ9"
 BOT_TOKEN = "8685765922:AAFWXBKbkVr_Nh0vrtMczUDMMA0o7vEQ9rA"
 CHAT_ID = "2136328173"
-URL = "https://www.hmtwatches.in/product_overview?id=eyJpdiI6IlhnZS9EemVhTXJnU09aL1VtSndnWUE9PSIsInZhbHVlIjoiSGdCM3l3a2RGQTNhZUxSTnhpUEtjZz09IiwibWFjIjoiZThiZWQyNGMzNjA4MThmZDRhYmYxNDFlYTE1ZTU2YTAxY2NlNWNlNGJhNjZmNzQ0OWZkMjA4OTcyYzQ3ZmY3NyIsInRhZyI6IiJ9"
-# ==========================
+
+# =========================
+# TELEGRAM FUNCTION
+# =========================
 
 def send_telegram(msg):
     url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
@@ -20,20 +26,26 @@ print("Starting container...")
 # Send startup message
 send_telegram("✅ Bot is running")
 
+# =========================
+# STOCK CHECK LOOP
+# =========================
+
 in_stock_last_time = False
 
 while True:
-   while True:
     try:
         r = requests.get(URL)
+        html = r.text.lower()
 
-        if "NOTIFY ME" in r.text:
+        # CHECK OUT OF STOCK
+        if "out of stock" in html:
             print("Still out of stock")
             in_stock_last_time = False
 
         else:
             print("IN STOCK!!!")
 
+            # Send alert only once
             if not in_stock_last_time:
                 send_telegram("🚨 HMT WATCH IS IN STOCK! BUY NOW!")
                 in_stock_last_time = True
