@@ -25,7 +25,7 @@ while True:
         r = requests.get(URL)
 
         # IMPORTANT FIX: detect ADD TO CART (means IN STOCK)
-        if True:
+        if "ADD TO CART" in r.text:
             print("IN STOCK!!!")
 
             if not in_stock_last_time:
