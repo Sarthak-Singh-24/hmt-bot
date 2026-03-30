@@ -3,7 +3,7 @@ import time
 
 URL = "https://www.hmtwatches.in/product_overview?id=eyJpdiI6IlhnZS9EemVhTXJnU09aL1VtSndnWUE9PSIsInZhbHVlIjoiSGdCM3l3a2RGQTNhZUxSTnhpUEtjZz09IiwibWFjIjoiZThiZWQyNGMzNjA4MThmZDRhYmYxNDFlYTE1ZTU2YTAxY2NlNWNlNGJhNjZmNzQ0OWZkMjA4OTcyYzQ3ZmY3NyIsInRhZyI6IiJ9"
 
-BOT_TOKEN = "8685765922:AAFWXBKbkVr_Nh0vrtMczUDMMA0o7vEQ9rA"
+BOT_TOKEN = "8685765922:AAHg-NYGlSiVnzTBdkfIXDUrqDGtwAPrJs0"
 CHAT_ID = "2136328173"
 
 def send_telegram(msg):
