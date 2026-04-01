@@ -1,10 +1,11 @@
 import requests
 import time
+import os
 
 URL = "https://www.hmtwatches.in/product_overview?id=eyJpdiI6IlhnZS9EemVhTXJnU09aL1VtSndnWUE9PSIsInZhbHVlIjoiSGdCM3l3a2RGQTNhZUxSTnhpUEtjZz09IiwibWFjIjoiZThiZWQyNGMzNjA4MThmZDRhYmYxNDFlYTE1ZTU2YTAxY2NlNWNlNGJhNjZmNzQ0OWZkMjA4OTcyYzQ3ZmY3NyIsInRhZyI6IiJ9"
 
-BOT_TOKEN = "8685765922:AAHg-NYGlSiVnzTBdkfIXDUrqDGtwAPrJs0"
-CHAT_ID = "2136328173"
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+CHAT_ID = os.getenv("CHAT_ID")
 
 def send_telegram(msg):
     url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
@@ -24,7 +25,6 @@ while True:
     try:
         r = requests.get(URL)
 
-        # IMPORTANT FIX: detect ADD TO CART (means IN STOCK)
         if "ADD TO CART" in r.text:
             print("IN STOCK!!!")
 
@@ -39,4 +39,4 @@ while True:
     except Exception as e:
         print("Error:", e)
 
-    time.sleep(10)
+    time.sleep(15)
