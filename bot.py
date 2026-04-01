@@ -23,8 +23,8 @@ def send_telegram(msg):
 
 print("Starting container...")
 
-# Startup message
-send_telegram("✅ Bot is running (secure version)")
+# Send startup message
+send_telegram("✅ Bot is running (final version)")
 
 in_stock_last_time = False
 
@@ -39,16 +39,18 @@ while True:
 
         r = requests.get(URL, headers=headers)
 
-        if "NOTIFY ME" in r.text:
-            print("Still out of stock")
-            in_stock_last_time = False
-
-        else:
+        # ✅ Correct detection logic
+        if "ADD TO CART" in r.text:
             print("IN STOCK!!!")
 
+            # send only once
             if not in_stock_last_time:
                 send_telegram("🚨 HMT WATCH IS IN STOCK! BUY NOW!")
                 in_stock_last_time = True
+
+        else:
+            print("Still out of stock")
+            in_stock_last_time = False
 
     except Exception as e:
         print("Error:", e)
